@@ -5,7 +5,7 @@ import { Spinner } from "react-bootstrap";
 
 class CommentArea extends Component {
   state = {
-    bookId: this.props.id,
+    // bookId: this.props.id,
     singleBookCommets: [],
     isLoading: true,
   };
@@ -38,7 +38,7 @@ class CommentArea extends Component {
   };
 
   componentDidMount() {
-    this.getSingleBookComments();
+    if (this.props.id !== "") this.getSingleBookComments();
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -51,21 +51,23 @@ class CommentArea extends Component {
   render() {
     return (
       <div className="mt-2 border-rounded">
-        <h6 className="mb-0 bg-primary text-center text-light">
-          Comments area
-        </h6>
-        {this.state.isLoading && (
-          <div className="d-flex justify-content-center my-2">
-            <Spinner animation="border" role="status"></Spinner>
-          </div>
-        )}
+        {/* <h6 className="mb-0 bg-primary text-center text-light">
+          Please select a book in order to see its comments
+        </h6> */}
+        {this.state.isLoading &&
+          this.props.id !== "" &&
+          this.state.spinnerChecker === true && (
+            <div className="d-flex justify-content-center my-2">
+              <Spinner animation="border" role="status"></Spinner>
+            </div>
+          )}
         <CommentsList
           getSingleBookComments={this.getSingleBookComments}
           commentsArray={this.state.singleBookCommets}
-          id={this.state.bookId}
+          id={this.props.id}
         />
         <AddComment
-          id={this.state.bookId}
+          id={this.props.id}
           getSingleBookComments={this.getSingleBookComments}
         />
       </div>

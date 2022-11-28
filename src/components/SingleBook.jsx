@@ -20,13 +20,17 @@ import { Component } from "react";
 // };
 
 class SingleBook extends Component {
+  state = {
+    selected: this.props.selected,
+  };
   render() {
     return (
       <div className={`col-12 col-sm-6 mb-3 mx-auto`}>
         <Card
-          className={`${this.props.selected ? "shadow-dark" : ""}`}
+          className={`${this.state.selected ? "shadow-dark" : ""}`}
           onClick={() => {
             this.props.changeSelectedBookAsin(this.props.book.asin);
+            this.setState({ selected: !this.state.selected });
           }}
         >
           <Card.Img variant="top" src={this.props.book.img} />

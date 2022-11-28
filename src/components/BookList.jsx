@@ -69,7 +69,6 @@ class BookList extends Component {
               type="text"
               placeholder="Type book title"
               value={this.state.search}
-              selected={this.state.selected}
               onChange={(event) => {
                 this.setState({ search: event.target.value });
               }}
@@ -93,6 +92,7 @@ class BookList extends Component {
                     book={book}
                     key={book.asin}
                     asin={book.asin}
+                    selected={false}
                     changeSelectedBookAsin={this.props.changeSelectedBookAsin}
                   />
                 );

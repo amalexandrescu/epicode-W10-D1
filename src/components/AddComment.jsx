@@ -7,7 +7,6 @@ class AddComment extends Component {
     commentToAdd: {
       comment: "",
       rate: "",
-      elementId: this.props.id,
     },
     writeYourCommentButtonClicked: false,
   };
@@ -32,7 +31,10 @@ class AddComment extends Component {
             Authorization:
               "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzdmNThmNGQ4MzkzNTAwMTVlOGM0YTQiLCJpYXQiOjE2NjkyOTAyMjgsImV4cCI6MTY3MDQ5OTgyOH0.mx34o8m4iZi7tqC_ghliyE-WV4X9Bysa6Q44k9-W9-A",
           },
-          body: JSON.stringify(this.state.commentToAdd),
+          body: JSON.stringify({
+            ...this.state.commentToAdd,
+            elementId: this.props.id,
+          }),
         }
       );
 
@@ -54,7 +56,7 @@ class AddComment extends Component {
   render() {
     return (
       <Form.Group className="text-center">
-        {!this.state.writeYourCommentButtonClicked && (
+        {!this.state.writeYourCommentButtonClicked && this.props.id && (
           <Button
             type="button"
             variant="outline-info"

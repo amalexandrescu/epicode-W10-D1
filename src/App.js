@@ -30,10 +30,16 @@ class App extends Component {
               <BookList
                 currentBookAsin={this.state.currentBookAsin}
                 changeSelectedBookAsin={this.changeSelectedBookAsin}
+                selected={this.state.selected}
               />
             </Col>
             <Col xs={12} md={6}>
               <h2 className="text-center">Comment Area</h2>
+              {!this.state.currentBookAsin && (
+                <h6 className="mb-0 bg-primary text-center text-light py-3">
+                  Please select a book in order to see its comments
+                </h6>
+              )}
               <CommentArea id={this.state.currentBookAsin} />
             </Col>
           </Row>

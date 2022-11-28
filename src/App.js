@@ -2,20 +2,42 @@ import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 // import Welcome from "./components/WarningSigns";
-import WarningSigns from "./components/WarningSigns";
-import MyBadge from "./components/MyBadge";
+
 import BookList from "./components/BookList";
-import { Row } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 import { Component } from "react";
+import CommentArea from "./components/CommentArea";
 
 class App extends Component {
+  state = {
+    currentBookAsin: "",
+  };
+
+  changeSelectedBookAsin = (newBookAsin) => {
+    this.setState({
+      currentBookAsin: newBookAsin,
+    });
+  };
+
   render() {
     return (
       <div>
-        <h1 className="text-center">Welcome to my amazing Book Store</h1>
-        {/* <WarningSigns variant="danger" stringContent="This is my Alert" />
-        <MyBadge color="warning" content="My First Badge" /> */}
-        <BookList />
+        <Container>
+          <h1 className="text-center">Welcome to my amazing Book Store</h1>
+          <Row className="justify-content-center mt-4">
+            <Col xs={12} md={6}>
+              <h2>Books</h2>
+              <BookList
+                currentBookAsin={this.state.currentBookAsin}
+                changeSelectedBookAsin={this.changeSelectedBookAsin}
+              />
+            </Col>
+            <Col xs={12} md={6}>
+              <h2 className="text-center">Comment Area</h2>
+              <CommentArea id={this.state.currentBookAsin} />
+            </Col>
+          </Row>
+        </Container>
       </div>
     );
   }

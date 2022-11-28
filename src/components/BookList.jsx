@@ -69,6 +69,7 @@ class BookList extends Component {
               type="text"
               placeholder="Type book title"
               value={this.state.search}
+              selected={this.state.selected}
               onChange={(event) => {
                 this.setState({ search: event.target.value });
               }}
@@ -87,7 +88,14 @@ class BookList extends Component {
                   .includes(this.state.search.toLowerCase());
               })
               .map((book) => {
-                return <SingleBook book={book} key={book.asin} />;
+                return (
+                  <SingleBook
+                    book={book}
+                    key={book.asin}
+                    asin={book.asin}
+                    changeSelectedBookAsin={this.props.changeSelectedBookAsin}
+                  />
+                );
               })}
         </Row>
       </Container>

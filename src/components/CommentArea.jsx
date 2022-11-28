@@ -41,6 +41,13 @@ class CommentArea extends Component {
     this.getSingleBookComments();
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.id !== this.props.id) {
+      console.log("NOW IT'S THE TIME TO FETCH THE NEW MOVIE!");
+      this.getSingleBookComments();
+    }
+  }
+
   render() {
     return (
       <div className="mt-2 border-rounded">
